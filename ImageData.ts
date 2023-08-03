@@ -11,3 +11,4 @@ export interface ImageData {
     }
     return imageData;
   };
+  
