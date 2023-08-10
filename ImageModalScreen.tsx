@@ -1,31 +1,34 @@
 import React from 'react';
 import { View, StyleSheet, Modal, Image, Dimensions, TouchableOpacity, Text } from 'react-native';
-import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { RouteProp } from '@react-navigation/native';
 import { RootStackParamList } from './types'; 
+import { ImageData } from './ImageData'; // Import the ImageData type
 
-interface ImageModalScreenProps {
+type ImageModalRouteProp = RouteProp<RootStackParamList, 'ImageModal'>;
+
+type NavigationProps = {
   navigation: StackNavigationProp<RootStackParamList, 'ImageModal'>;
-  route: RouteProp<RootStackParamList, 'ImageModal'>;
-}
+  route: ImageModalRouteProp; // Use the specific route prop type
+};
 
-const ImageModalScreen: React.FC<ImageModalScreenProps> = ({ navigation, route }) => {
+function ImageModalScreen({ navigation, route }: NavigationProps) {
   const screenWidth = Dimensions.get('window').width;
   const screenHeight = Dimensions.get('window').height;
 
-  const { url } = route.params;
+  const { url } = route.params; // Access the URL from the route params
 
   const handleCloseModal = () => {
     navigation.goBack();
   };
 
   return (
-    <Modal visible={!!url} transparent={true} onRequestClose={handleCloseModal}>
+    <Modal visible={true} transparent={true} onRequestClose={handleCloseModal}>
       <View style={styles.modalContainer}>
         <TouchableOpacity style={styles.modalBackground} onPress={handleCloseModal}>
           <Image
             style={[styles.modalImage, { width: screenWidth - 40, height: screenHeight / 2 }]}
-            source={{ uri: url }}
+            source={{ uri: url }} 
           />
         </TouchableOpacity>
         <TouchableOpacity style={styles.closeButton} onPress={handleCloseModal}>
@@ -34,7 +37,7 @@ const ImageModalScreen: React.FC<ImageModalScreenProps> = ({ navigation, route }
       </View>
     </Modal>
   );
-};
+}
 
 const styles = StyleSheet.create({
   modalContainer: {
