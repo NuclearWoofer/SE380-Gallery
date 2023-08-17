@@ -8,7 +8,7 @@ const numColumns = 3;
 const screenWidth = Dimensions.get('window').width;
 
 interface PhotoGalleryScreenProps {
-  navigation: StackNavigationProp<RootStackParamList, 'PhotoGallery'>;
+  navigation: StackNavigationProp<RootStackParamList, 'PhotoGalleryScreen'>;
 }
 
 function PhotoGalleryScreen({ navigation }: PhotoGalleryScreenProps) {

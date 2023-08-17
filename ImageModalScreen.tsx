@@ -3,7 +3,6 @@ import { View, StyleSheet, Modal, Image, Dimensions, TouchableOpacity, Text } fr
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RouteProp } from '@react-navigation/native';
 import { RootStackParamList } from './types'; 
-import { ImageData } from './ImageData'; // Import the ImageData type
 
 type ImageModalRouteProp = RouteProp<RootStackParamList, 'ImageModal'>;
 

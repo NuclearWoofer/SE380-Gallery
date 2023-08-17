@@ -1,8 +1,11 @@
 // types.ts
 export type RootStackParamList = {
-    PhotoGallery: undefined;
+    PhotoGalleryScreen: undefined;
     ImageDetail: { url: string };
     ImageModal: { url: string };
     WeatherApp: undefined;
+    BarCodeScannerApp: undefined;
+    Forecast: { days: number };
+
   };
   
