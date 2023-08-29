@@ -6,6 +6,6 @@ export type RootStackParamList = {
     WeatherApp: undefined;
     BarCodeScannerApp: undefined;
     Forecast: { days: number };
-
+    ProductDetail:  { url: string };
   };
   

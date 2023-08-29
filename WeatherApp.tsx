@@ -4,14 +4,18 @@ import { useWeatherFetch } from './useWeatherFetch';
 import axios from 'axios';
 
 const WeatherApp = () => {
-  const zipCode = '02865';
+  const zipCode = '02909';
+  const apiKey = '69b9dadf89e54109b2e201910232908';
   const url =
-    `http://api.weatherapi.com/v1/` +
+    `http://api.weatherapi.com/v1/current.json` +
     `?q=${zipCode}` +
-    `&days=5` +
-    `&key=09885dc1ac4041939b9151003231608`;
+    `&key=${apiKey}`;
 
   const { loading, data, error } = useWeatherFetch(url);
+
+  useEffect(() => {
+    // Fetching weather data is already happening in the custom hook.
+  }, [url]);
 
   if (loading) {
     return (
@@ -34,36 +38,11 @@ const WeatherApp = () => {
       </View>
     );
   }
-  //testing
-  useEffect(() => {
-    console.log('Fetching weather data...');
-    const getCurrentWeather = async () => {
-      try {
-        const response = await axios.get(url);
-        console.log('Weather data:', response.data);
-      } catch (error) {
-        console.log('Weather data fetch error:', error);
-      }
-    };
-    getCurrentWeather();
-  }, [url]);
 
   return (
     <View style={{ flex: 1 }}>
-      <Text>Location: {data.location.name}</Text>
-      <Text>Weather: {data.current.condition.text}</Text>
-
-      <View>
-        <Text>Forecast for the next {data.forecast.forecastday.length} days:</Text>
-        {data.forecast.forecastday.map((forecastDay, index) => (
-          <View key={index}>
-            <Text>Day {index + 1}</Text>
-            <Text>Date: {forecastDay.date}</Text>
-            <Text>Weather: {forecastDay.day.condition.text}</Text>
-            <Text>Temperature: {forecastDay.day.avgtemp_c}°C</Text>
-          </View>
-        ))}
-      </View>
+      <Text>Current Location: {data.location.name}</Text>
+      <Text>Current Weather: {data.current.condition.text}</Text>
     </View>
   );
 };

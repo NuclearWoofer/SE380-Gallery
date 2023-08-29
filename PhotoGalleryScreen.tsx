@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, FlatList, Image, Dimensions, TextInput, TouchableOpacity, Modal } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList } from './types'; // Update the path as needed
+import { RootStackParamList } from './types'; 
 import { ImageData, generateImageData } from './ImageData';
 
 const numColumns = 3;
