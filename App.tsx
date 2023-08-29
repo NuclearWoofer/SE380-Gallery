@@ -12,7 +12,6 @@ import WeatherApp from './WeatherApp';
 const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
 
-// Screen components for the tab at the bottom
 const BottomTabScreens = () => (
   <Tab.Navigator>
     <Tab.Screen name="WeatherApp" component={WeatherApp} />

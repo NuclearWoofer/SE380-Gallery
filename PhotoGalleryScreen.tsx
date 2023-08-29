@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, FlatList, Image, Dimensions, TextInput, TouchableOpacity, Modal } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList } from './types'; // Update the path as needed
+import { RootStackParamList } from './types'; 
 import { ImageData, generateImageData } from './ImageData';
 
 const numColumns = 3;
@@ -17,7 +17,7 @@ function PhotoGalleryScreen({ navigation }: PhotoGalleryScreenProps) {
 
   const handleSearch = (text: string) => {
     setSearchTerm(text);
-    const filteredImages = generateImageData().filter((image) =>
+    const filteredImages = generateImageData().filter((image: { id: { toString: () => string | string[]; }; }) =>
       image.id.toString().includes(text)
     );
     setImages(filteredImages);
