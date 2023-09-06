@@ -3,10 +3,12 @@ import { View, StyleSheet, Image, TouchableOpacity, Text } from 'react-native';
 import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from './types';
+import { NativeStackNavigationProp, NativeStackNavigatorProps } from '@react-navigation/native-stack/lib/typescript/src/types';
+import Animated from 'react-native-reanimated';
 
 type ImageDetailScreenRouteProp = RouteProp<RootStackParamList, 'ImageDetail'>;
 
-type ImageDetailScreenNavigationProp = StackNavigationProp<RootStackParamList, 'ImageDetail'>;
+type ImageDetailScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'ImageDetail'>;
 
 type ImageDetailScreenProps = {
   route: ImageDetailScreenRouteProp;
@@ -21,12 +23,12 @@ function ImageDetailsScreen({ route, navigation }: ImageDetailScreenProps) {
   };
 
   return (
-    <View style={styles.container}>
+    <Animated.View style={styles.container}>
       <TouchableOpacity onPress={handleOpenModal}>
-        <Image style={styles.image} source={{ uri: url }} />
+        <Animated.Image style={styles.image} source={{ uri: url }} />
       </TouchableOpacity>
       <Text style={styles.urlText}>{url}</Text>
-    </View>
+    </Animated.View>
   );
 }
 

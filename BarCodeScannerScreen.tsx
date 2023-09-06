@@ -1,42 +1,29 @@
-import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, Button } from 'react-native';
-import { BarCodeScanner } from 'expo-barcode-scanner';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList } from './types'; // Import the RootStackParamList
-import { Product } from './ProductTypes';
-type BarcodeScannerScreenNavigationProp = StackNavigationProp<RootStackParamList, 'BarCodeScannerApp'>;
+import React, { useEffect, useState } from "react";
+import { BarCodeScanner } from "expo-barcode-scanner";
+import { Button, StyleSheet, Text, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { StackParamList } from "./ScannerStack";
 
-type Props = {
-  navigation: BarcodeScannerScreenNavigationProp;
-};
+type ProductDetailNavigationProp = StackNavigationProp<StackParamList, "ProductDetail">;
 
-export default function BarcodeScannerScreen({ navigation }: Props) {
-  const [hasPermission, setHasPermission] = useState<boolean | null>(null);
+const BarCodeScannerScreen = () => {
+  const navigation = useNavigation<ProductDetailNavigationProp>();
+  const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
 
   useEffect(() => {
     const getBarCodeScannerPermissions = async () => {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
-      setHasPermission(status === 'granted');
+      setHasPermission(status === "granted");
     };
 
     getBarCodeScannerPermissions();
   }, []);
 
-  const handleBarCodeScanned = ({ type, data }: { type: string; data: string }) => {
+  const handleBarCodeScanned = ({ data }: { data: string }) => {
     setScanned(true);
-    const product: Product = {
-      id: data,
-      name: 'Product Name',
-      description: 'Product Description',
-      image: undefined,
-      price: undefined,
-      rating: undefined
-    };
-
-    navigation.navigate('ProductDetail', {
-      product, 
-    });
+    navigation.navigate("ProductDetail", { url: data });
   };
 
   if (hasPermission === null) {
@@ -49,19 +36,24 @@ export default function BarcodeScannerScreen({ navigation }: Props) {
   return (
     <View style={styles.container}>
       <BarCodeScanner
-        barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
         style={StyleSheet.absoluteFillObject}
+        barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
       />
-      {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />}
+      {scanned && (
+        <Button title={"Tap to Scan Again"} onPress={() => setScanned(false)} />
+      )}
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
+
+export default BarCodeScannerScreen;

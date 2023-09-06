@@ -3,19 +3,21 @@ import { View, StyleSheet, Modal, Image, Dimensions, TouchableOpacity, Text } fr
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RouteProp } from '@react-navigation/native';
 import { RootStackParamList } from './types'; 
+import { NativeStackNavigationProp, NativeStackNavigatorProps } from '@react-navigation/native-stack/lib/typescript/src/types';
+import Animated from 'react-native-reanimated';
 
 type ImageModalRouteProp = RouteProp<RootStackParamList, 'ImageModal'>;
 
 type NavigationProps = {
-  navigation: StackNavigationProp<RootStackParamList, 'ImageModal'>;
-  route: ImageModalRouteProp; // Use the specific route prop type
+  navigation: NativeStackNavigationProp<RootStackParamList, 'ImageModal'>;
+  route: ImageModalRouteProp; 
 };
 
 function ImageModalScreen({ navigation, route }: NavigationProps) {
   const screenWidth = Dimensions.get('window').width;
   const screenHeight = Dimensions.get('window').height;
 
-  const { url } = route.params; // Access the URL from the route params
+  const { url } = route.params; 
 
   const handleCloseModal = () => {
     navigation.goBack();
@@ -25,7 +27,7 @@ function ImageModalScreen({ navigation, route }: NavigationProps) {
     <Modal visible={true} transparent={true} onRequestClose={handleCloseModal}>
       <View style={styles.modalContainer}>
         <TouchableOpacity style={styles.modalBackground} onPress={handleCloseModal}>
-          <Image
+          <Animated.Image
             style={[styles.modalImage, { width: screenWidth - 40, height: screenHeight / 2 }]}
             source={{ uri: url }} 
           />
