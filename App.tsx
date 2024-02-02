@@ -1,14 +1,21 @@
-// App.tsx or index.js
-import React from 'react';
-import { SafeAreaView } from 'react-native';
-import PhotoGalleryScreen from './PhotoGalleryScreen';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { NavigationContainer } from '@react-navigation/native';
+import 'react-native-gesture-handler'
+import Navigation  from './Navigation';
+const Drawer = createDrawerNavigator();
 
-const App = () => {
+export default function App() {
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <PhotoGalleryScreen />
-    </SafeAreaView>
+    <NavigationContainer>
+      <Drawer.Navigator 
+        initialRouteName="Navigation"
+        screenOptions={{ headerShown: false, drawerPosition: "right" }}
+      >
+        <Drawer.Screen 
+          name="Navigation" 
+          component={Navigation} 
+        />
+      </Drawer.Navigator>
+    </NavigationContainer>
   );
-};
-
-export default App;
+}
