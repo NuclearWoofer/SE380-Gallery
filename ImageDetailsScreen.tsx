@@ -13,7 +13,7 @@ type ImageDetailScreenProps = {
   navigation: ImageDetailScreenNavigationProp;
 };
 
-const ImageDetailsScreen: React.FC<ImageDetailScreenProps> = ({ route, navigation }) => {
+function ImageDetailsScreen({ route, navigation }: ImageDetailScreenProps) {
   const { url } = route.params;
 
   const handleOpenModal = () => {
@@ -28,7 +28,7 @@ const ImageDetailsScreen: React.FC<ImageDetailScreenProps> = ({ route, navigatio
       <Text style={styles.urlText}>{url}</Text>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {

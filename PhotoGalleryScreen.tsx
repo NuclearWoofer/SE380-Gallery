@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, FlatList, Image, Dimensions, TextInput, TouchableOpacity, Modal } from 'react-native';
-import { useNavigation, RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from './types'; // Update the path as needed
 import { ImageData, generateImageData } from './ImageData';
@@ -12,7 +11,7 @@ interface PhotoGalleryScreenProps {
   navigation: StackNavigationProp<RootStackParamList, 'PhotoGallery'>;
 }
 
-const PhotoGalleryScreen: React.FC<PhotoGalleryScreenProps> = ({ navigation }) => {
+function PhotoGalleryScreen({ navigation }: PhotoGalleryScreenProps) {
   const [images, setImages] = useState<ImageData[]>(generateImageData());
   const [searchTerm, setSearchTerm] = useState<string>('');
 
@@ -51,7 +50,7 @@ const PhotoGalleryScreen: React.FC<PhotoGalleryScreenProps> = ({ navigation }) =
       />
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
